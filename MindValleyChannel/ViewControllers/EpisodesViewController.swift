@@ -18,6 +18,9 @@ class ViewController: UIViewController {
         
         // Fetch episodes
         viewModel.fetchEpisodes()
+        
+        // Fetch channels
+        viewModel.fetchChannels()
     }
 }
 
