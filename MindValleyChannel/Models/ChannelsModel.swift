@@ -14,15 +14,15 @@ struct ChannelsDataModel: Codable {
 }
 
 struct ChannelModel: Codable {
-    let id: String
     let title: String
-    let mediaCount: Int
     let series: [SeriesModel]?
+    let mediaCount: Int
     let latestMedia: [CourseModel]
+    let id: String?
     let iconAsset: ThumbnailAssetModel?
     let coverAsset: CoverAssetModel
 }
 
 struct ThumbnailAssetModel: Codable {
-    let thumbnailUrl: String
+    let thumbnailUrl: String?
 }

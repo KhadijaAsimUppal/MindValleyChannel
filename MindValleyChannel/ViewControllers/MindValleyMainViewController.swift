@@ -8,16 +8,21 @@
 import UIKit
 import Combine
 
-class ViewController: UIViewController {
+class MindValleyMainViewController: UIViewController {
     
-    private var viewModel = EpisodesViewModel()
-    private var cancellables = Set<AnyCancellable>()
+    private var viewModel = MindValleyMainViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Fetch episodes
         viewModel.fetchEpisodes()
+        
+        // Fetch channels
+        viewModel.fetchChannels()
+        
+        // Fetch categories
+        viewModel.fetchCategories()
     }
 }
 

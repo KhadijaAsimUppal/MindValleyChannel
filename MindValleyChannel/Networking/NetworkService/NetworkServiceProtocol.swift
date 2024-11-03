@@ -8,5 +8,7 @@
 import Combine
 
 protocol NetworkServiceProtocol {
+    
     func request<T: Decodable>(_ endpoint: Endpoint, decodingType: T.Type) -> AnyPublisher<T, NetworkError>
 }
+
