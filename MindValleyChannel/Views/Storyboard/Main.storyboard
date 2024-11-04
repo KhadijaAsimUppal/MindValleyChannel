@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -158,22 +157,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-CC-KxR">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-CC-KxR">
+                                <rect key="frame" x="0.0" y="122.66666666666669" width="393" height="729.33333333333326"/>
+                                <color key="backgroundColor" name="MVBackgroundGrey"/>
+                                <color key="separatorColor" name="MVPrimaryGrey"/>
                                 <connections>
                                     <outlet property="dataSource" destination="tgk-J8-yI7" id="tTy-2C-nLX"/>
                                     <outlet property="delegate" destination="tgk-J8-yI7" id="iV4-0C-Cbm"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilM-x1-fp8">
+                                <rect key="frame" x="12.000000000000007" y="71" width="125.66666666666669" height="39.666666666666657"/>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="30"/>
+                                <color key="textColor" name="MVBasicWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5RA-uy-bBg"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="MVBackgroundGrey"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="JAK-CC-KxR" secondAttribute="bottom" id="HYC-LC-xPA"/>
                             <constraint firstItem="JAK-CC-KxR" firstAttribute="leading" secondItem="5RA-uy-bBg" secondAttribute="leading" id="Io5-sJ-7Y1"/>
+                            <constraint firstItem="ilM-x1-fp8" firstAttribute="top" secondItem="5RA-uy-bBg" secondAttribute="top" constant="12" id="Pka-eb-WEB"/>
+                            <constraint firstItem="JAK-CC-KxR" firstAttribute="top" secondItem="ilM-x1-fp8" secondAttribute="bottom" constant="12" id="XUj-gs-DFN"/>
+                            <constraint firstItem="ilM-x1-fp8" firstAttribute="leading" secondItem="5RA-uy-bBg" secondAttribute="leading" constant="12" id="XdC-Sq-nks"/>
                             <constraint firstItem="JAK-CC-KxR" firstAttribute="trailing" secondItem="5RA-uy-bBg" secondAttribute="trailing" id="ciL-pj-1Ei"/>
-                            <constraint firstItem="JAK-CC-KxR" firstAttribute="top" secondItem="28w-e4-otH" secondAttribute="top" id="rQj-U8-zaq"/>
                         </constraints>
                     </view>
                     <connections>
@@ -192,11 +200,11 @@
         <namedColor name="MVBasicWhite">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="MVPrimaryGrey">
+            <color red="0.75700002908706665" green="0.75700002908706665" blue="0.75700002908706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="MVSecondaryGrey">
             <color red="0.58399999141693115" green="0.59600001573562622" blue="0.61599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

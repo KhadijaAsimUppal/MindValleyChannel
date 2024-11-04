@@ -19,7 +19,7 @@
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="SHR-RE-UN9">
                         <rect key="frame" x="0.0" y="0.0" width="188" height="363"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="MVBackgroundGrey"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ok1-CF-cj4">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -32,7 +32,7 @@
                         </connections>
                     </collectionView>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" name="MVBackgroundGrey"/>
                 <constraints>
                     <constraint firstItem="SHR-RE-UN9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Gnx-Ih-e5D"/>
                     <constraint firstAttribute="trailing" secondItem="SHR-RE-UN9" secondAttribute="trailing" id="Urs-Qc-U3a"/>

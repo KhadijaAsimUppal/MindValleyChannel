@@ -88,8 +88,38 @@ extension MainViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return ContentSection(rawValue: section)?.title
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return ContentSection(rawValue: section)?.title
+//    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor(named: ColorConstants.mvBackgroundGrey.rawValue)
+
+        let headerLabel = UILabel()
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerLabel.text = ContentSection(rawValue: section)?.title
+        
+        headerLabel.font = UIFont(name: "Roboto-Bold", size: 17)
+        headerLabel.textColor = UIColor(named: ColorConstants.mvSecondaryGrey.rawValue) ?? UIColor.systemGray
+        
+        headerView.addSubview(headerLabel)
+        
+        // Add constraints for the label to position it within the header view
+        NSLayoutConstraint.activate([
+            headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 12),
+            headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -12),
+            headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 8),
+            headerLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
+        ])
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40 // Adjust the height as needed
     }
 }
 
