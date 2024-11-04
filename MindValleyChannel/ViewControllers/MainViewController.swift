@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
         
         contentTableView.register(UINib(nibName: "EpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: "EpisodeTableViewCell")
         contentTableView.register(UINib(nibName: "ChannelTableViewCell", bundle: nil), forCellReuseIdentifier: "ChannelTableViewCell")
-//        contentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "CategoryCell")
+        contentTableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
     
         
         // Fetch data
@@ -62,7 +62,7 @@ extension MainViewController: UITableViewDataSource {
         case .channels:
             return viewModel.channels.count // Each channel is a separate row
         case .categories:
-            return viewModel.categories.count // Each category is a separate row
+            return 1 // Each category is a separate row
         }
     }
     
@@ -83,13 +83,10 @@ extension MainViewController: UITableViewDataSource {
             cell.configure(with: channel)
             addFooterLine(to: cell, footerLine: footerLine)
             return cell
-        default:
-            return UITableViewCell()
-//        case .categories:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-//            let category = viewModel.categories[indexPath.row]
-//            cell.textLabel?.text = category.name
-//            return cell
+        case .categories:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableViewCell", for: indexPath) as! CategoryTableViewCell
+            cell.configure(with: viewModel.categories)
+            return cell
         }
     }
     
@@ -159,11 +156,11 @@ extension MainViewController: UITableViewDelegate {
         
         switch contentSection {
         case .episodes:
-            return 354 // Set appropriate height for the collection view cell
+            return 372 // Set appropriate height for the collection view cell
         case .channels:
             return 380 // Set height for each channel row
         case .categories:
-            return 50 // Set height for each category row
+            return 400 // Set height for each category row
         }
     }
 }
@@ -181,7 +178,7 @@ enum ContentSection: Int, CaseIterable {
         case .channels:
             return "Channels"
         case .categories:
-            return "Categories"
+            return "Browse by Categories"
         }
     }
 }
