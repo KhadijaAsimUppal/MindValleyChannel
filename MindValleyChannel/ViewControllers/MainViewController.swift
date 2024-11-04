@@ -19,8 +19,9 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         contentTableView.register(UINib(nibName: "EpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: "EpisodeTableViewCell")
-//        contentTableView.register(UINib(nibName: "ChannelTableViewCell", bundle: nil), forCellReuseIdentifier: "ChannelTableViewCell")
+        contentTableView.register(UINib(nibName: "ChannelTableViewCell", bundle: nil), forCellReuseIdentifier: "ChannelTableViewCell")
 //        contentTableView.register(UITableViewCell.self, forCellReuseIdentifier: "CategoryCell")
+    
         
         // Fetch data
         viewModel.fetchEpisodes()
@@ -68,18 +69,22 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let contentSection = ContentSection(rawValue: indexPath.section) else { return UITableViewCell() }
         
+        let footerLine = RowFooterLineView()
+        
         switch contentSection {
         case .episodes:
             let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
             cell.configureCell(with: viewModel.episodes) // Configure collection view in the cell
+            addFooterLine(to: cell, footerLine: footerLine)
+            return cell
+        case .channels:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChannelTableViewCell", for: indexPath) as! ChannelTableViewCell
+            let channel = viewModel.channels[indexPath.row]
+            cell.configure(with: channel)
+            addFooterLine(to: cell, footerLine: footerLine)
             return cell
         default:
             return UITableViewCell()
-//        case .channels:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "ChannelTableViewCell", for: indexPath) as! ChannelTableViewCell
-//            let channel = viewModel.channels[indexPath.row]
-//            cell.configure(with: channel)
-//            return cell
 //        case .categories:
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
 //            let category = viewModel.categories[indexPath.row]
@@ -95,32 +100,55 @@ extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor(named: ColorConstants.mvBackgroundGrey.rawValue)
+        guard let contentSection = ContentSection(rawValue: section) else { return nil }
+        
+        switch contentSection {
+        case .episodes, .categories:
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor(named: ColorConstants.mvBackgroundGrey.rawValue)
 
-        let headerLabel = UILabel()
-        headerLabel.translatesAutoresizingMaskIntoConstraints = false
-        headerLabel.text = ContentSection(rawValue: section)?.title
-        
-        headerLabel.font = UIFont(name: "Roboto-Bold", size: 17)
-        headerLabel.textColor = UIColor(named: ColorConstants.mvSecondaryGrey.rawValue) ?? UIColor.systemGray
-        
-        headerView.addSubview(headerLabel)
-        
-        // Add constraints for the label to position it within the header view
-        NSLayoutConstraint.activate([
-            headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 12),
-            headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -12),
-            headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 8),
-            headerLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
-        ])
-        
-        return headerView
+            let headerLabel = UILabel()
+            headerLabel.translatesAutoresizingMaskIntoConstraints = false
+            headerLabel.text = ContentSection(rawValue: section)?.title
+            
+            headerLabel.font = UIFont(name: "Roboto-Bold", size: 17)
+            headerLabel.textColor = UIColor(named: ColorConstants.mvSecondaryGrey.rawValue) ?? UIColor.systemGray
+            
+            headerView.addSubview(headerLabel)
+            
+            // Add constraints for the label to position it within the header view
+            NSLayoutConstraint.activate([
+                headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 12),
+                headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -12),
+                headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 8),
+                headerLabel.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -8)
+            ])
+            return headerView
+        case .channels:
+            return nil
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40 // Adjust the height as needed
+        guard let contentSection = ContentSection(rawValue: section) else { return 0 }
+        switch contentSection {
+        case .categories, .episodes:
+            return 40
+        case .channels:
+            return 0
+        }
     }
+    
+    private func addFooterLine(to cell: UITableViewCell, footerLine: RowFooterLineView) {
+         cell.contentView.addSubview(footerLine)
+         
+         NSLayoutConstraint.activate([
+             footerLine.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 8),
+             footerLine.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -8),
+             footerLine.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
+             footerLine.heightAnchor.constraint(equalToConstant: 0.5) // Adjust line thickness as needed
+         ])
+     }
 }
 
 // MARK: - UITableViewDelegate
@@ -133,7 +161,7 @@ extension MainViewController: UITableViewDelegate {
         case .episodes:
             return 354 // Set appropriate height for the collection view cell
         case .channels:
-            return 100 // Set height for each channel row
+            return 380 // Set height for each channel row
         case .categories:
             return 50 // Set height for each category row
         }

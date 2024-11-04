@@ -44,7 +44,6 @@ extension MindValleyMainViewController: UICollectionViewDataSource {
         }
         
         let episode = viewModel.episodes[indexPath.item]
-        cell.configure(with: episode)
         
         return cell
     }

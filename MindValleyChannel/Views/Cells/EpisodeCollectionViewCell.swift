@@ -22,14 +22,13 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     }
     
     // Configure the cell with episode data
-    func configure(with episode: EpisodeModel) {
-        titleLabel.text = episode.title
-        subtitleLabel.text = episode.channel.title
+    func configure(title: String, subtitle: String?, imageUrl: String) {
+        titleLabel.text = title
+        subtitleLabel.text = subtitle
         
         // Assuming that you have an `url` in your model and use a placeholder image
         // Load image asynchronously
-        let urlString = episode.coverAsset.url
-        if let url = URL(string: urlString) {
+        if let url = URL(string: imageUrl) {
             URLSession.shared.dataTask(with: url) { data, _, _ in
                 if let data = data, let image = UIImage(data: data) {
                     DispatchQueue.main.async {
