@@ -18,9 +18,6 @@ class MindValleyMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up collection view
-//        episodesCollectionView.dataSource = self
-//        episodesCollectionView.delegate = self
         episodesCollectionView.register(UINib(nibName: "EpisodeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EpisodeCollectionViewCell")
         
         // Fetch episodes
@@ -58,16 +55,18 @@ extension MindValleyMainViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         // Set your desired cell size here
-        let width = collectionView.bounds.width / 2.2 - 2
-        let height = width * 1.2  // Adjust height based on your design
+        let width = collectionView.bounds.width / 2.4
+        let height = width * 1.5 // Adjust height based on your design
         return CGSize(width: width, height: height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
-    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
-    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 2
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+//        return 2
+//    }
 }

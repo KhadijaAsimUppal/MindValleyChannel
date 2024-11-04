@@ -3,9 +3,15 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,39 +29,49 @@
                             <constraint firstAttribute="width" constant="152" id="sq4-hj-YEJ"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5s2-k0-f5u">
-                        <rect key="frame" x="20" y="240.00000000000003" width="152" height="32.333333333333343"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Channel Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IH-ev-toT">
-                        <rect key="frame" x="20" y="284.33333333333331" width="152" height="15.666666666666686"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="y6f-eV-lhq">
+                        <rect key="frame" x="20" y="240" width="152" height="56"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u50-ZF-Sjr" userLabel="Title Label">
+                                <rect key="frame" x="0.0" y="0.0" width="152" height="32.666666666666664"/>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="17"/>
+                                <color key="textColor" name="MVBasicWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Subtitle " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCC-h1-ENr" userLabel="Subtitle Label">
+                                <rect key="frame" x="0.0" y="38.666666666666686" width="152" height="17.333333333333329"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                                <color key="textColor" name="MVSecondaryGrey"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="7IH-ev-toT" firstAttribute="leading" secondItem="5s2-k0-f5u" secondAttribute="leading" id="2Nj-Sn-ZPO"/>
-                <constraint firstAttribute="bottom" secondItem="7IH-ev-toT" secondAttribute="bottom" id="5qr-RD-FM7"/>
                 <constraint firstItem="g2b-iD-pXb" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="8Mf-il-63I"/>
-                <constraint firstItem="5s2-k0-f5u" firstAttribute="top" secondItem="g2b-iD-pXb" secondAttribute="bottom" constant="12" id="Gpv-Vq-Gj1"/>
-                <constraint firstItem="5s2-k0-f5u" firstAttribute="leading" secondItem="g2b-iD-pXb" secondAttribute="leading" id="L4b-Nm-RHH"/>
-                <constraint firstItem="7IH-ev-toT" firstAttribute="trailing" secondItem="5s2-k0-f5u" secondAttribute="trailing" id="Lfa-Ch-VFt"/>
-                <constraint firstItem="5s2-k0-f5u" firstAttribute="trailing" secondItem="g2b-iD-pXb" secondAttribute="trailing" id="UlI-AU-h89"/>
+                <constraint firstAttribute="bottom" secondItem="y6f-eV-lhq" secondAttribute="bottom" constant="4" id="Oie-zs-VkM"/>
+                <constraint firstItem="y6f-eV-lhq" firstAttribute="trailing" secondItem="g2b-iD-pXb" secondAttribute="trailing" id="P7b-vH-1fb"/>
+                <constraint firstItem="y6f-eV-lhq" firstAttribute="top" secondItem="g2b-iD-pXb" secondAttribute="bottom" constant="12" id="SJX-lJ-GDN"/>
                 <constraint firstItem="g2b-iD-pXb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="W2v-J2-Hll"/>
-                <constraint firstItem="7IH-ev-toT" firstAttribute="top" secondItem="5s2-k0-f5u" secondAttribute="bottom" constant="12" id="oYR-4K-Giz"/>
+                <constraint firstItem="y6f-eV-lhq" firstAttribute="leading" secondItem="g2b-iD-pXb" secondAttribute="leading" id="cYC-gg-h9X"/>
             </constraints>
             <size key="customSize" width="192" height="300"/>
             <connections>
                 <outlet property="episodeImageView" destination="g2b-iD-pXb" id="ktT-3R-aTc"/>
-                <outlet property="subtitleLabel" destination="7IH-ev-toT" id="JOS-V5-0LQ"/>
-                <outlet property="titleLabel" destination="5s2-k0-f5u" id="5qB-4E-Nx8"/>
+                <outlet property="subtitleLabel" destination="WCC-h1-ENr" id="RoS-xM-Rw6"/>
+                <outlet property="titleLabel" destination="u50-ZF-Sjr" id="l7G-kL-ihn"/>
             </connections>
             <point key="canvasLocation" x="-1.5267175572519083" y="74.647887323943664"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <namedColor name="MVBasicWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MVSecondaryGrey">
+            <color red="0.58399999141693115" green="0.59600001573562622" blue="0.61599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		DA500E122CD6313C0025A6BA /* Exceptions for "MindValleyChannel" folder in "MindValleyChannel" target */ = {
+		DAA1C5352CD8DD9D00D0666C /* Exceptions for "MindValleyChannel" folder in "MindValleyChannel" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -43,7 +43,7 @@
 		DA500DE92CD6313A0025A6BA /* MindValleyChannel */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				DA500E122CD6313C0025A6BA /* Exceptions for "MindValleyChannel" folder in "MindValleyChannel" target */,
+				DAA1C5352CD8DD9D00D0666C /* Exceptions for "MindValleyChannel" folder in "MindValleyChannel" target */,
 			);
 			path = MindValleyChannel;
 			sourceTree = "<group>";
