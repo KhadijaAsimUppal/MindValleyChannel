@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tgk-J8-yI7">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Bold.ttf">
+            <string>Roboto-Bold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Mind Valley Main View Controller-->
+        <scene sceneID="LmO-a0-M83">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="tgk-J8-yI7" customClass="MindValleyMainViewController" customModule="MindValleyChannel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="28w-e4-otH">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="12" estimatedSectionHeaderHeight="-1" sectionFooterHeight="12" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-CC-KxR">
+                                <rect key="frame" x="0.0" y="118" width="393" height="734"/>
+                                <color key="backgroundColor" name="MVBackgroundGrey"/>
+                                <color key="separatorColor" name="MVPrimaryGrey"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="tgk-J8-yI7" id="tTy-2C-nLX"/>
+                                    <outlet property="delegate" destination="tgk-J8-yI7" id="iV4-0C-Cbm"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilM-x1-fp8">
+                                <rect key="frame" x="12.000000000000007" y="71" width="125.66666666666669" height="35"/>
+                                <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="30"/>
+                                <color key="textColor" name="MVBasicWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5RA-uy-bBg"/>
+                        <color key="backgroundColor" name="MVBackgroundGrey"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="JAK-CC-KxR" secondAttribute="bottom" id="HYC-LC-xPA"/>
+                            <constraint firstItem="JAK-CC-KxR" firstAttribute="leading" secondItem="5RA-uy-bBg" secondAttribute="leading" id="Io5-sJ-7Y1"/>
+                            <constraint firstItem="ilM-x1-fp8" firstAttribute="top" secondItem="5RA-uy-bBg" secondAttribute="top" constant="12" id="Pka-eb-WEB"/>
+                            <constraint firstItem="JAK-CC-KxR" firstAttribute="top" secondItem="ilM-x1-fp8" secondAttribute="bottom" constant="12" id="XUj-gs-DFN"/>
+                            <constraint firstItem="ilM-x1-fp8" firstAttribute="leading" secondItem="5RA-uy-bBg" secondAttribute="leading" constant="12" id="XdC-Sq-nks"/>
+                            <constraint firstItem="JAK-CC-KxR" firstAttribute="trailing" secondItem="5RA-uy-bBg" secondAttribute="trailing" id="ciL-pj-1Ei"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentTableView" destination="JAK-CC-KxR" id="UNr-Nv-Xdu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ofs-aX-ptL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="249.61832061068702" y="-131.69014084507043"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="MVBackgroundGrey">
+            <color red="0.13699999451637268" green="0.15299999713897705" blue="0.18400000035762787" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MVBasicWhite">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MVPrimaryGrey">
+            <color red="0.75700002908706665" green="0.75700002908706665" blue="0.75700002908706665" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

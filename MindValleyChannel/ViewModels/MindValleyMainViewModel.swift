@@ -5,24 +5,22 @@
 //  Created by Khadija Asim on 02/11/2024.
 //
 
-import Foundation
+import UIKit
 import Combine
 
-/// ViewModel responsible for fetching and managing data for the MindValley main view, including episodes, channels, and categories.
+///ViewModel responsible for fetching and managing data for the MindValley main view, including episodes, channels, and categories.
 class MindValleyMainViewModel: ObservableObject {
     
     // MARK: - Published Properties
-    @Published var episodes: [EpisodeModel] = []
-    @Published var channels: [ChannelModel] = []
-    @Published var categories: [CategoryModel] = []
-    
+    @Published private(set) var episodes: [EpisodeModel] = []
+    @Published private(set) var channels: [ChannelModel] = []
+    @Published private(set) var categories: [CategoryModel] = []
     @Published var episodesErrorMessage: String?
     @Published var channelsErrorMessage: String?
     @Published var categoriesErrorMessage: String?
     
     // MARK: - Private Properties
     private var cancellables = Set<AnyCancellable>()
-    
     private let episodeService: EpisodeService
     private let channelsService: ChannelsService
     private let categoriesService: CategoriesService
@@ -36,8 +34,65 @@ class MindValleyMainViewModel: ObservableObject {
     }
 }
 
-// MARK: - Fetch Methods
+// MARK: - TableView Configuration
 extension MindValleyMainViewModel {
+    
+    /// Returns the number of sections in the table view.
+    var numberOfSections: Int {
+        return ContentSection.allCases.count
+    }
+    
+    /// Returns the number of rows in a section.
+    func numberOfRows(in section: Int) -> Int {
+        guard let contentSection = ContentSection(rawValue: section) else { return 0 }
+        switch contentSection {
+        case .episodes, .categories:
+            return 1
+        case .channels:
+            return channels.count
+        }
+    }
+    
+    /// Returns the height for a section header.
+    func heightForHeader(in section: Int) -> CGFloat {
+        guard let contentSection = ContentSection(rawValue: section) else { return 0 }
+        return contentSection == .channels ? 0 : 40
+    }
+    
+    /// Returns the height for a specific section.
+    func heightForSection(at section: Int) -> CGFloat {
+        guard let contentSection = ContentSection(rawValue: section) else { return UITableView.automaticDimension }
+        switch contentSection {
+        case .episodes:
+            return 372
+        case .channels:
+            return 380
+        case .categories:
+            return 400
+        }
+    }
+}
+
+// MARK: - Data Access Methods
+extension MindValleyMainViewModel {
+    
+    func getEpisodes() -> [EpisodeModel] {
+        return episodes
+    }
+    
+    func getChannel(at index: Int) -> ChannelModel? {
+        guard index >= 0 && index < channels.count else { return nil }
+        return channels[index]
+    }
+    
+    func getCategories() -> [CategoryModel] {
+        return categories
+    }
+}
+
+// MARK: - Data Fetch Methods
+extension MindValleyMainViewModel {
+    
     /// Fetches episodes data from the episode service.
     /// Updates `episodes` on success, or sets `episodesErrorMessage` on failure.
     func fetchEpisodes() {
