@@ -13,3 +13,8 @@ enum ColorConstants: String {
     case mvSecondaryOpaqueGrey = "MVSecondaryOpaqueGrey"
 }
 
+struct ViewIdConstants {
+    static let episodeTableViewCell = "EpisodeTableViewCell"
+    static let channelTableViewCell = "ChannelTableViewCell"
+    static let categoryTableViewCell = "CategoryTableViewCell"
+}

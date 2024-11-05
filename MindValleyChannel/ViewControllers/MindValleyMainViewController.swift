@@ -88,18 +88,18 @@ extension MindValleyMainViewController: UITableViewDataSource {
         
         switch contentSection {
         case .episodes:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeTableViewCell", for: indexPath) as! EpisodeTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ViewIdConstants.episodeTableViewCell, for: indexPath) as! EpisodeTableViewCell
             cell.configureCell(with: viewModel.episodes)
             addFooterLine(to: cell)
             return cell
         case .channels:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChannelTableViewCell", for: indexPath) as! ChannelTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ViewIdConstants.channelTableViewCell, for: indexPath) as! ChannelTableViewCell
             let channel = viewModel.channels[indexPath.row]
             cell.configure(with: channel)
             addFooterLine(to: cell)
             return cell
         case .categories:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryTableViewCell", for: indexPath) as! CategoryTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: ViewIdConstants.categoryTableViewCell, for: indexPath) as! CategoryTableViewCell
             cell.configure(with: viewModel.categories)
             return cell
         }
