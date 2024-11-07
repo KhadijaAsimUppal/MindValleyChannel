@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tgk-J8-yI7">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -22,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="12" estimatedSectionHeaderHeight="-1" sectionFooterHeight="12" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JAK-CC-KxR">
-                                <rect key="frame" x="0.0" y="118" width="393" height="734"/>
+                                <rect key="frame" x="0.0" y="122.66666666666669" width="393" height="729.33333333333326"/>
                                 <color key="backgroundColor" name="MVBackgroundGrey"/>
                                 <color key="separatorColor" name="MVPrimaryGrey"/>
                                 <connections>
@@ -31,18 +32,27 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channels" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilM-x1-fp8">
-                                <rect key="frame" x="12.000000000000007" y="71" width="125.66666666666669" height="35"/>
+                                <rect key="frame" x="12.000000000000007" y="71" width="125.66666666666669" height="39.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="30"/>
                                 <color key="textColor" name="MVBasicWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lg5-ui-ujK">
+                                <rect key="frame" x="171.66666666666666" y="401" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="8AX-k1-zRR"/>
+                                    <constraint firstAttribute="height" constant="50" id="c3u-kt-eR7"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5RA-uy-bBg"/>
                         <color key="backgroundColor" name="MVBackgroundGrey"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="JAK-CC-KxR" secondAttribute="bottom" id="HYC-LC-xPA"/>
+                            <constraint firstItem="lg5-ui-ujK" firstAttribute="centerY" secondItem="28w-e4-otH" secondAttribute="centerY" id="InC-BR-BEM"/>
                             <constraint firstItem="JAK-CC-KxR" firstAttribute="leading" secondItem="5RA-uy-bBg" secondAttribute="leading" id="Io5-sJ-7Y1"/>
                             <constraint firstItem="ilM-x1-fp8" firstAttribute="top" secondItem="5RA-uy-bBg" secondAttribute="top" constant="12" id="Pka-eb-WEB"/>
+                            <constraint firstItem="lg5-ui-ujK" firstAttribute="centerX" secondItem="28w-e4-otH" secondAttribute="centerX" id="Tdb-hA-D5s"/>
                             <constraint firstItem="JAK-CC-KxR" firstAttribute="top" secondItem="ilM-x1-fp8" secondAttribute="bottom" constant="12" id="XUj-gs-DFN"/>
                             <constraint firstItem="ilM-x1-fp8" firstAttribute="leading" secondItem="5RA-uy-bBg" secondAttribute="leading" constant="12" id="XdC-Sq-nks"/>
                             <constraint firstItem="JAK-CC-KxR" firstAttribute="trailing" secondItem="5RA-uy-bBg" secondAttribute="trailing" id="ciL-pj-1Ei"/>
