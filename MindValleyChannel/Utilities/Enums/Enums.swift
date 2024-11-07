@@ -21,3 +21,26 @@ enum ContentSection: Int, CaseIterable {
         }
     }
 }
+
+enum MediaDisplayable {
+    case series(SeriesModel)
+    case course(CourseModel)
+    
+    var title: String {
+        switch self {
+        case .series(let series):
+            return series.title
+        case .course(let course):
+            return course.title
+        }
+    }
+    
+    var imageUrl: String {
+        switch self {
+        case .series(let series):
+            return series.coverAsset.url
+        case .course(let course):
+            return course.coverAsset.url
+        }
+    }
+}
