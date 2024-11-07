@@ -24,7 +24,7 @@ class NetworkReachability {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
-                self?.isConnected = (path.status == .satisfied)
+               self?.isConnected = (path.status == .satisfied)
             }
         }
     }

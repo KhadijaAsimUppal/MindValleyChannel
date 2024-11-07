@@ -31,10 +31,9 @@ class ChannelsService {
             .eraseToAnyPublisher()
     }
     
-    /// Saves chansnel model to coredata asynchronously
+    /// Saves chansnel model to coredata
     private func saveToCoreData(channels: [ChannelModel]) {
-        DispatchQueue.global(qos: .background).async {
-            channels.forEach { CoreDataManager.shared.saveChannel($0) }
-        }
+        channels.forEach { CoreDataManager.shared.saveChannel($0) }
+        CoreDataManager.shared.saveContext() // Only call saveContext once after all inserts are done
     }
 }

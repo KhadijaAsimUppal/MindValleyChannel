@@ -23,7 +23,7 @@ class EpisodeService {
         return networkService.request(MindValleyAPI.getEpisodes, decodingType: EpisodesModel.self)
             .handleEvents(receiveOutput: { episodesModel in
                 // Save to Core Data asynchronously after returning data to the UI
-                self.saveToCoreData(episodesModel: episodesModel)
+                self.saveToCoreData(episodes: episodesModel)
             })
             .map { $0.data.media }
             .catch { _ in
@@ -33,13 +33,10 @@ class EpisodeService {
             .eraseToAnyPublisher()
     }
     
-    /// Saves episodes model to coredata asynchronously
-    private func saveToCoreData(episodesModel: EpisodesModel) {
-        DispatchQueue.global(qos: .background).async {
-            episodesModel.data.media.forEach { episode in
-                CoreDataManager.shared.saveEpisode(episode)
-            }
-        }
+    /// Saves episodes model to coredata    
+    private func saveToCoreData(episodes: EpisodesModel) {
+        episodes.data.media.forEach { CoreDataManager.shared.saveEpisode($0) }
+        CoreDataManager.shared.saveContext() // Only call saveContext once after all inserts are done
     }
 }
 

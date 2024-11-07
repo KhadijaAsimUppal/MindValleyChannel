@@ -31,11 +31,10 @@ class CategoriesService {
             .eraseToAnyPublisher()
     }
     
-    /// Saves categories to coredata asynchronously
+    /// Saves categories to coredata
     private func saveToCoreData(categories: [CategoryModel]) {
-        DispatchQueue.global(qos: .background).async {
-            categories.forEach { CoreDataManager.shared.saveCategory($0) }
-        }
+        categories.forEach { CoreDataManager.shared.saveCategory($0) }
+        CoreDataManager.shared.saveContext() // Only call saveContext once after all inserts are done
     }
 }
 
