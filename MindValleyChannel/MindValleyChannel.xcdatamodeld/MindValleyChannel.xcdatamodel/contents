@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CachedCategoryModel" representedClassName="CachedCategoryModel" syncable="YES">
+        <attribute name="name" attributeType="String"/>
+    </entity>
+    <entity name="CachedChannelModel" representedClassName="CachedChannelModel" syncable="YES">
+        <attribute name="coverAsseturl" attributeType="String"/>
+        <attribute name="iconAssetUrl" optional="YES" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="mediaCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <relationship name="courses" toMany="YES" deletionRule="Nullify" destinationEntity="CachedCourseModel"/>
+        <relationship name="series" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CachedSeriesModel"/>
+    </entity>
+    <entity name="CachedCourseModel" representedClassName="CachedCourseModel" syncable="YES">
+        <attribute name="coverAssetModel" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+    </entity>
     <entity name="CachedEpisodeModel" representedClassName="CachedEpisodeModel" syncable="YES">
         <attribute name="channelTitle" attributeType="String"/>
         <attribute name="coverAssetUrl" attributeType="String"/>
@@ -9,5 +26,9 @@
     <entity name="CachedImage" representedClassName="CachedImage" syncable="YES">
         <attribute name="data" attributeType="Binary"/>
         <attribute name="url" attributeType="String"/>
+    </entity>
+    <entity name="CachedSeriesModel" representedClassName="CachedSeriesModel" syncable="YES">
+        <attribute name="coverAssetUrl" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
     </entity>
 </model>
