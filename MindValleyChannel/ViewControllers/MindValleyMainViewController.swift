@@ -84,8 +84,6 @@ extension MindValleyMainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let contentSection = ContentSection(rawValue: indexPath.section) else { return UITableViewCell() }
         
-        let footerLine = RowFooterLineView()
-        
         switch contentSection {
         case .episodes:
             let cell = tableView.dequeueReusableCell(withIdentifier: ViewIdConstants.episodeTableViewCell, for: indexPath) as! EpisodeTableViewCell

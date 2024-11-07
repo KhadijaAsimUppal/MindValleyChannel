@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23231" systemVersion="23F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CachedEpisodeModel" representedClassName="CachedEpisodeModel" syncable="YES">
+        <attribute name="channelTitle" attributeType="String"/>
+        <attribute name="coverAssetUrl" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="type" attributeType="String"/>
+    </entity>
+    <entity name="CachedImage" representedClassName="CachedImage" syncable="YES">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="url" attributeType="String"/>
+    </entity>
 </model>

@@ -25,17 +25,43 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     func configure(title: String, subtitle: String?, imageUrl: String) {
         titleLabel.text = title
         subtitleLabel.text = subtitle
-        
-        // Assuming that you have an `url` in your model and use a placeholder image
-        // Load image asynchronously
-        if let url = URL(string: imageUrl) {
-            URLSession.shared.dataTask(with: url) { data, _, _ in
-                if let data = data, let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self.episodeImageView.image = image
-                    }
-                }
-            }.resume()
+
+        loadImage(for: imageUrl) { [weak self] image in
+            self?.episodeImageView.image = image
         }
     }
+    
+    /// Loads an image from a given URL string, with a fallback to Core Data cache if network loading fails.
+    /// - Parameters:
+    ///   - urlString: The URL string of the image to load.
+    ///   - completion: A closure that returns the loaded `UIImage?` on the main thread.
+    /// This method attempts to download the image from the specified URL. If successful, the image data
+    /// is saved to Core Data cache for future use. In case of a network failure, it retrieves the image
+    /// from the Core Data cache if available.
+    private func loadImage(for urlString: String, completion: @escaping (UIImage?) -> Void) {
+        // Attempt to download image
+        guard let url = URL(string: urlString) else { return }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                // Successfully downloaded the image; save it to cache and return
+                CoreDataManager.shared.saveImage(url: urlString, data: data)
+                DispatchQueue.main.async {
+                    completion(UIImage(data: data))
+                }
+            } else if let cachedData = CoreDataManager.shared.fetchImage(url: urlString), let cachedImage = UIImage(data: cachedData) {
+                // Network request failed; fetch image from cache if available
+                DispatchQueue.main.async {
+                    completion(cachedImage)
+                }
+            } else {
+                // If no image is available in cache either, return nil
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+        }.resume()
+    }
+
+
 }

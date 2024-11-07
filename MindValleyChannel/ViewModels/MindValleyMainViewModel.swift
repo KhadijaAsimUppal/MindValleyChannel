@@ -32,6 +32,12 @@ class MindValleyMainViewModel: ObservableObject {
         self.channelsService = ChannelsService(networkService: networkService)
         self.categoriesService = CategoriesService(networkService: networkService)
     }
+    
+    func resetData() {
+        episodes = []
+        channels = []
+        categories = []
+    }
 }
 
 // MARK: - TableView Configuration
@@ -98,12 +104,8 @@ extension MindValleyMainViewModel {
     func fetchEpisodes() {
         episodeService.fetchEpisodes()
             .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { [weak self] completion in
-                if case .failure(let error) = completion {
-                    self?.episodesErrorMessage = error.localizedDescription
-                }
-            }, receiveValue: { [weak self] episodesModel in
-                self?.episodes = episodesModel.data.media
+            .sink(receiveValue: { [weak self] episodes in
+                self?.episodes = episodes
             })
             .store(in: &cancellables)
     }
@@ -137,4 +139,5 @@ extension MindValleyMainViewModel {
             })
             .store(in: &cancellables)
     }
+
 }
