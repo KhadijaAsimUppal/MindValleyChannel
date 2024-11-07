@@ -16,8 +16,8 @@ extension CachedSeriesModel {
         return NSFetchRequest<CachedSeriesModel>(entityName: "CachedSeriesModel")
     }
 
-    @NSManaged public var title: String?
-    @NSManaged public var coverAssetUrl: String?
+    @NSManaged public var title: String
+    @NSManaged public var coverAssetUrl: String
 
 }
 

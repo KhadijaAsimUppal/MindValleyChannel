@@ -6,11 +6,11 @@
     <entity name="CachedChannelModel" representedClassName="CachedChannelModel" syncable="YES">
         <attribute name="coverAsseturl" attributeType="String"/>
         <attribute name="iconAssetUrl" optional="YES" attributeType="String"/>
-        <attribute name="id" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="mediaCount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
-        <relationship name="courses" toMany="YES" deletionRule="Nullify" destinationEntity="CachedCourseModel"/>
-        <relationship name="series" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CachedSeriesModel"/>
+        <relationship name="courses" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CachedCourseModel"/>
+        <relationship name="series" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CachedSeriesModel"/>
     </entity>
     <entity name="CachedCourseModel" representedClassName="CachedCourseModel" syncable="YES">
         <attribute name="coverAssetModel" attributeType="String"/>

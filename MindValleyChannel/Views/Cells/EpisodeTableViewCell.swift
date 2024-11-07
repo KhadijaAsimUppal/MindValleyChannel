@@ -43,12 +43,4 @@ class EpisodeTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColle
         let width = collectionView.bounds.width / 2.4
         return CGSize(width: width, height: width * 1.8)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 4 // Vertical spacing between cells
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 4 // Horizontal spacing between cells
-//    }
 }

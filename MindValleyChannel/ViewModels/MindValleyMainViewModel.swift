@@ -104,7 +104,11 @@ extension MindValleyMainViewModel {
     func fetchEpisodes() {
         episodeService.fetchEpisodes()
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] episodes in
+            .sink(receiveCompletion: { [weak self] completion in
+                if case .failure(let error) = completion {
+                    self?.episodesErrorMessage = error.localizedDescription
+                }
+            }, receiveValue: { [weak self] episodes in
                 self?.episodes = episodes
             })
             .store(in: &cancellables)
@@ -120,7 +124,7 @@ extension MindValleyMainViewModel {
                     self?.channelsErrorMessage = error.localizedDescription
                 }
             }, receiveValue: { [weak self] channelsModel in
-                self?.channels = channelsModel.data.channels
+                self?.channels = channelsModel
             })
             .store(in: &cancellables)
     }
@@ -135,7 +139,7 @@ extension MindValleyMainViewModel {
                     self?.categoriesErrorMessage = error.localizedDescription
                 }
             }, receiveValue: { [weak self] categoriesModel in
-                self?.categories = categoriesModel.data.categories
+                self?.categories = categoriesModel
             })
             .store(in: &cancellables)
     }

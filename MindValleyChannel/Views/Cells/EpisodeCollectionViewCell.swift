@@ -39,20 +39,31 @@ class EpisodeCollectionViewCell: UICollectionViewCell {
     /// is saved to Core Data cache for future use. In case of a network failure, it retrieves the image
     /// from the Core Data cache if available.
     private func loadImage(for urlString: String, completion: @escaping (UIImage?) -> Void) {
-        // Attempt to download image
+        // Check for internet connectivity first
+        if !NetworkReachability.shared.isConnected {
+            // No internet connection; load image from Core Data cache if available
+            if let cachedData = CoreDataManager.shared.fetchImage(url: urlString), let cachedImage = UIImage(data: cachedData) {
+                DispatchQueue.main.async {
+                    completion(cachedImage)
+                }
+            } else {
+                // If no cached image is available, return nil
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+            }
+            return
+        }
+        
+        // Internet connection is available; attempt to download the image
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let data = data {
-                // Successfully downloaded the image; save it to cache and return
+                // Successfully downloaded the image; save it to Core Data cache and return
                 CoreDataManager.shared.saveImage(url: urlString, data: data)
                 DispatchQueue.main.async {
                     completion(UIImage(data: data))
-                }
-            } else if let cachedData = CoreDataManager.shared.fetchImage(url: urlString), let cachedImage = UIImage(data: cachedData) {
-                // Network request failed; fetch image from cache if available
-                DispatchQueue.main.async {
-                    completion(cachedImage)
                 }
             } else {
                 // If no image is available in cache either, return nil

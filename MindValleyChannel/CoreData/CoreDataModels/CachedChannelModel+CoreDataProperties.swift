@@ -16,30 +16,13 @@ extension CachedChannelModel {
         return NSFetchRequest<CachedChannelModel>(entityName: "CachedChannelModel")
     }
 
-    @NSManaged public var title: String?
+    @NSManaged public var coverAsseturl: String
+    @NSManaged public var iconAssetUrl: String?
     @NSManaged public var id: String?
     @NSManaged public var mediaCount: Int32
-    @NSManaged public var iconAssetUrl: String?
-    @NSManaged public var coverAsseturl: String?
+    @NSManaged public var title: String
+    @NSManaged public var courses: NSSet
     @NSManaged public var series: NSSet?
-    @NSManaged public var courses: NSSet?
-
-}
-
-// MARK: Generated accessors for series
-extension CachedChannelModel {
-
-    @objc(addSeriesObject:)
-    @NSManaged public func addToSeries(_ value: CachedSeriesModel)
-
-    @objc(removeSeriesObject:)
-    @NSManaged public func removeFromSeries(_ value: CachedSeriesModel)
-
-    @objc(addSeries:)
-    @NSManaged public func addToSeries(_ values: NSSet)
-
-    @objc(removeSeries:)
-    @NSManaged public func removeFromSeries(_ values: NSSet)
 
 }
 
@@ -57,6 +40,23 @@ extension CachedChannelModel {
 
     @objc(removeCourses:)
     @NSManaged public func removeFromCourses(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for series
+extension CachedChannelModel {
+
+    @objc(addSeriesObject:)
+    @NSManaged public func addToSeries(_ value: CachedSeriesModel)
+
+    @objc(removeSeriesObject:)
+    @NSManaged public func removeFromSeries(_ value: CachedSeriesModel)
+
+    @objc(addSeries:)
+    @NSManaged public func addToSeries(_ values: NSSet)
+
+    @objc(removeSeries:)
+    @NSManaged public func removeFromSeries(_ values: NSSet)
 
 }
 

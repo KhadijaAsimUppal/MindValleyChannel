@@ -16,9 +16,9 @@ extension CachedCourseModel {
         return NSFetchRequest<CachedCourseModel>(entityName: "CachedCourseModel")
     }
 
-    @NSManaged public var type: String?
-    @NSManaged public var title: String?
-    @NSManaged public var coverAssetModel: String?
+    @NSManaged public var type: String
+    @NSManaged public var title: String
+    @NSManaged public var coverAssetModel: String
 
 }
 
