@@ -16,10 +16,12 @@ class MindValleyMainViewController: UIViewController {
     // MARK: - Properties
     private var viewModel = MindValleyMainViewModel()
     private var cancellables = Set<AnyCancellable>()
+    private let activityLoader = UIActivityIndicatorView(style: .large)
     
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupLoader()
         setupTableView()
         bindViewModel()
         fetchData()
@@ -28,6 +30,16 @@ class MindValleyMainViewController: UIViewController {
 
 // MARK: - Private Setup Methods
 extension MindValleyMainViewController {
+    
+    private func setupLoader() {
+        activityLoader.translatesAutoresizingMaskIntoConstraints = false
+        activityLoader.backgroundColor = .black
+        view.addSubview(activityLoader)
+        NSLayoutConstraint.activate([
+            activityLoader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityLoader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
     
     /// Configures the table view with cell registrations.
     private func setupTableView() {
@@ -52,13 +64,20 @@ extension MindValleyMainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.contentTableView.reloadData() }
             .store(in: &cancellables)
+        
+        // Bind loader visibility
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isLoading in
+                isLoading ? self?.activityLoader.startAnimating() : self?.activityLoader.stopAnimating()
+                self?.contentTableView.isHidden = isLoading
+            }
+            .store(in: &cancellables)
     }
     
     /// Initiates data fetch from the view model.
     private func fetchData() {
-        viewModel.fetchEpisodes()
-        viewModel.fetchChannels()
-        viewModel.fetchCategories()
+        viewModel.fetchAllData()
     }
 }
 
@@ -83,8 +102,6 @@ extension MindValleyMainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let contentSection = ContentSection(rawValue: indexPath.section) else { return UITableViewCell() }
-        
-        let footerLine = RowFooterLineView()
         
         switch contentSection {
         case .episodes:

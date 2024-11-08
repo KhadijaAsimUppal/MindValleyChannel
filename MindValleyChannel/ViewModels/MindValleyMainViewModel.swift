@@ -15,9 +15,12 @@ class MindValleyMainViewModel: ObservableObject {
     @Published private(set) var episodes: [EpisodeModel] = []
     @Published private(set) var channels: [ChannelModel] = []
     @Published private(set) var categories: [CategoryModel] = []
+    
     @Published var episodesErrorMessage: String?
     @Published var channelsErrorMessage: String?
     @Published var categoriesErrorMessage: String?
+    
+    @Published var isLoading: Bool = false // Track loading state
     
     // MARK: - Private Properties
     private var cancellables = Set<AnyCancellable>()
@@ -93,24 +96,37 @@ extension MindValleyMainViewModel {
 // MARK: - Data Fetch Methods
 extension MindValleyMainViewModel {
     
+    func fetchAllData() {
+        isLoading = true
+        fetchEpisodes()
+        fetchChannels()
+        fetchCategories()
+        // Turn off loading after all requests complete
+        Publishers.CombineLatest3($episodes, $channels, $categories)
+            .sink { [weak self] _, _, _ in
+                self?.isLoading = false
+            }
+            .store(in: &cancellables)
+    }
+    
     /// Fetches episodes data from the episode service.
     /// Updates `episodes` on success, or sets `episodesErrorMessage` on failure.
-    func fetchEpisodes() {
+    private func fetchEpisodes() {
         episodeService.fetchEpisodes()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 if case .failure(let error) = completion {
                     self?.episodesErrorMessage = error.localizedDescription
                 }
-            }, receiveValue: { [weak self] episodesModel in
-                self?.episodes = episodesModel.data.media
+            }, receiveValue: { [weak self] episodes in
+                self?.episodes = episodes
             })
             .store(in: &cancellables)
     }
     
     /// Fetches channels data from the channels service.
     /// Updates `channels` on success, or sets `channelsErrorMessage` on failure.
-    func fetchChannels() {
+    private func fetchChannels() {
         channelsService.fetchChannels()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
@@ -118,14 +134,14 @@ extension MindValleyMainViewModel {
                     self?.channelsErrorMessage = error.localizedDescription
                 }
             }, receiveValue: { [weak self] channelsModel in
-                self?.channels = channelsModel.data.channels
+                self?.channels = channelsModel
             })
             .store(in: &cancellables)
     }
     
     /// Fetches categories data from the categories service.
     /// Updates `categories` on success, or sets `categoriesErrorMessage` on failure.
-    func fetchCategories() {
+    private func fetchCategories() {
         categoriesService.fetchCategories()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
@@ -133,8 +149,9 @@ extension MindValleyMainViewModel {
                     self?.categoriesErrorMessage = error.localizedDescription
                 }
             }, receiveValue: { [weak self] categoriesModel in
-                self?.categories = categoriesModel.data.categories
+                self?.categories = categoriesModel
             })
             .store(in: &cancellables)
     }
+
 }

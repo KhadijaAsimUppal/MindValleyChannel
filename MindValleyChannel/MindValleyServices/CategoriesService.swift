@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Foundation
 
 /// A service class responsible for fetching categories data from the API.
 class CategoriesService {
@@ -16,9 +17,24 @@ class CategoriesService {
         self.networkService = networkService
     }
     
-    /// Fetches categories data from the API.
+    /// Fetches categories data from the API with fallback to Core Data if the network request fails.
     /// - Returns: A publisher that emits a `CategoriesModel` on success or a `NetworkError` on failure.
-    func fetchCategories() -> AnyPublisher<CategoriesModel, NetworkError> {
+    func fetchCategories() -> AnyPublisher<[CategoryModel], Never> {
         return networkService.request(MindValleyAPI.getCategories, decodingType: CategoriesModel.self)
+            .map { $0.data.categories }
+            .handleEvents(receiveOutput: { categories in
+                self.saveToCoreData(categories: categories)
+            })
+            .catch { _ in
+                Just(CoreDataManager.shared.fetchCategories())
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    /// Saves categories to coredata
+    private func saveToCoreData(categories: [CategoryModel]) {
+        categories.forEach { CoreDataManager.shared.saveCategory($0) }
+        CoreDataManager.shared.saveContext() // Only call saveContext once after all inserts are done
     }
 }
+
