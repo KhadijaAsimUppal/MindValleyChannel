@@ -43,9 +43,9 @@ extension MindValleyMainViewController {
     
     /// Configures the table view with cell registrations.
     private func setupTableView() {
-        contentTableView.register(UINib(nibName: "EpisodeTableViewCell", bundle: nil), forCellReuseIdentifier: "EpisodeTableViewCell")
-        contentTableView.register(UINib(nibName: "ChannelTableViewCell", bundle: nil), forCellReuseIdentifier: "ChannelTableViewCell")
-        contentTableView.register(UINib(nibName: "CategoryTableViewCell", bundle: nil), forCellReuseIdentifier: "CategoryTableViewCell")
+        contentTableView.register(UINib(nibName: ViewIdConstants.episodeTableViewCell, bundle: nil), forCellReuseIdentifier: ViewIdConstants.episodeTableViewCell)
+        contentTableView.register(UINib(nibName: ViewIdConstants.channelTableViewCell, bundle: nil), forCellReuseIdentifier: ViewIdConstants.channelTableViewCell)
+        contentTableView.register(UINib(nibName: ViewIdConstants.categoryTableViewCell, bundle: nil), forCellReuseIdentifier: ViewIdConstants.categoryTableViewCell)
     }
     
     /// Binds the view model data updates to the view controller.
