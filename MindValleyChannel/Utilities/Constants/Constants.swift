@@ -17,4 +17,6 @@ struct ViewIdConstants {
     static let episodeTableViewCell = "EpisodeTableViewCell"
     static let channelTableViewCell = "ChannelTableViewCell"
     static let categoryTableViewCell = "CategoryTableViewCell"
+    static let categoryCollectionViewCell = "CategoryCollectionViewCell"
+    static let episodeCollectionViewCell = "EpisodeCollectionViewCell"
 }

@@ -15,7 +15,7 @@ class CategoryTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        collectionView.register(UINib(nibName: "CategoryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCollectionViewCell")
+        collectionView.register(UINib(nibName: ViewIdConstants.categoryCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: ViewIdConstants.categoryCollectionViewCell)
     }
 
     func configure(with categories: [CategoryModel]) {
@@ -32,7 +32,7 @@ extension CategoryTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCollectionViewCell", for: indexPath) as? CategoryCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewIdConstants.categoryCollectionViewCell, for: indexPath) as? CategoryCollectionViewCell else {
             return UICollectionViewCell()
         }
         

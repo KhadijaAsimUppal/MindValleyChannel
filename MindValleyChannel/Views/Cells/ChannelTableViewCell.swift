@@ -70,7 +70,7 @@ extension ChannelTableViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EpisodeCollectionViewCell", for: indexPath) as? EpisodeCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewIdConstants.episodeCollectionViewCell, for: indexPath) as? EpisodeCollectionViewCell else {
             return UICollectionViewCell()
         }
         

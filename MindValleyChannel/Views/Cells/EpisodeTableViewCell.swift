@@ -16,7 +16,7 @@ class EpisodeTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColle
         super.awakeFromNib()
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(UINib(nibName: "EpisodeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EpisodeCollectionViewCell")
+        collectionView.register(UINib(nibName: ViewIdConstants.episodeCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: ViewIdConstants.episodeCollectionViewCell)
     }
     
     func configureCell(with episodes: [EpisodeModel]) {
@@ -30,7 +30,7 @@ class EpisodeTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EpisodeCollectionViewCell", for: indexPath) as! EpisodeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ViewIdConstants.episodeCollectionViewCell, for: indexPath) as! EpisodeCollectionViewCell
         let episode = episodes[indexPath.item]
         cell.configure(title: episode.title,
                        subtitle: episode.channel.title,
