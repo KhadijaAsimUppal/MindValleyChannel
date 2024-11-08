@@ -86,10 +86,10 @@ extension CoreDataManager {
             let cachedEpisodes = try context.fetch(fetchRequest)
             return cachedEpisodes.map { cachedEpisode in
                 EpisodeModel(
-                    type: "CACHED: \(cachedEpisode.type)",
-                    title: "CACHED: \(cachedEpisode.title)",
+                    type: cachedEpisode.type,
+                    title: cachedEpisode.title,
                     coverAsset: CoverAssetModel(url: cachedEpisode.coverAssetUrl),
-                    channel: ChannelInfoModel(title: "CACHED: \(cachedEpisode.channelTitle)")
+                    channel: ChannelInfoModel(title: cachedEpisode.channelTitle)
                 )
             }
         } catch {
@@ -111,7 +111,7 @@ extension CoreDataManager {
         
         do {
             // Check if the channel already exists
-            if let existingChannel = try context.fetch(fetchRequest).first {
+            if let _ = try context.fetch(fetchRequest).first {
                 print("Channel with id: \(channel.id ?? "N/A") already exists, skipping save.")
                 return
             }
@@ -168,7 +168,7 @@ extension CoreDataManager {
                     CourseModel(type: $0.type, title: $0.title, coverAsset: CoverAssetModel(url: $0.coverAssetModel))
                 }
                 
-                return ChannelModel(title: "CACHED: \(cachedChannel.title)",
+                return ChannelModel(title: "\(cachedChannel.title)",
                                     series: series,
                                     mediaCount: Int(cachedChannel.mediaCount),
                                     latestMedia: courses ?? [],
@@ -217,7 +217,7 @@ extension CoreDataManager {
         let fetchRequest: NSFetchRequest<CachedCategoryModel> = CachedCategoryModel.fetchRequest()
         do {
             let cachedCategories = try context.fetch(fetchRequest)
-            return cachedCategories.map { CategoryModel(name: "CACHED: \($0.name ?? "")") }
+            return cachedCategories.map { CategoryModel(name: $0.name ?? "") }
         } catch {
             print("Failed to fetch categories: \(error)")
             return []
@@ -235,7 +235,7 @@ extension CoreDataManager {
         fetchRequest.predicate = NSPredicate(format: "url == %@", url)
         
         do {
-            if let existingImage = try context.fetch(fetchRequest).first {
+            if let _ = try context.fetch(fetchRequest).first {
                 print("Image with URL: \(url) already exists")
                 return
             } else {
