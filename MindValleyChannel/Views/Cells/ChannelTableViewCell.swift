@@ -55,6 +55,9 @@ class ChannelTableViewCell: UITableViewCell {
             self.latestMedia = channel.latestMedia.map { MediaDisplayable.course($0) }
         }
         
+        // Limit to 6 items
+        self.latestMedia =  Array(latestMedia.prefix(6))
+        
         collectionView.reloadData()
     }
 }

@@ -20,7 +20,8 @@ class EpisodeTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColle
     }
     
     func configureCell(with episodes: [EpisodeModel]) {
-        self.episodes = episodes
+        //Limit to 6 items
+        self.episodes = Array(episodes.prefix(6))
         collectionView.reloadData()
     }
     
